@@ -24,7 +24,3 @@
 /cactus/:cactusid/water - POST - water selected cactus
 
 /cactus/:cactusid/killbug - POST kill bug on cactus
-
-
-
-
