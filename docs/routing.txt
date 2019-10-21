@@ -1,0 +1,30 @@
+### home
+/ - GET - list of pots, redirect to /dashboard
+
+### dashboard
+/dashboard - GET - list of pot list
+/dashboard/nextday POST - increment daycounter
+
+### pot list
+/pots/new - GET - render new plot form
+/pots/new - POST - send new plot form
+
+### pot actions
+/pot/:potid/repaint - GET - render repaint pot
+/pot/:potid/repaint - POST - repaint pot
+
+/pot/:potid/delete - DELETE - throw away pot
+
+/pot/:potid/plant - GET - render cactus planting page
+/pot/:potid/plant - POST - send cactus planting request
+
+### cactus actions
+/cactus/:cactusid/info - GET - render cactus info page
+
+/cactus/:cactusid/water - POST - water selected cactus
+
+/cactus/:cactusid/killbug - POST kill bug on cactus
+
+
+
+

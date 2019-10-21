@@ -1,0 +1,21 @@
+generic
+    render - render the values into the templates using the template engine
+    mainredirect - redirects to '/dashboard' when the user visits '/'
+
+pot
+    getPotList
+    getPot
+    updatePot
+    createPot
+    deletePot
+
+cactus
+    getCactus
+    createCactus
+    waterCactus
+    unbugCactus
+    deleteCactus (when bug eats it)
+
+daycounter
+    incrementDayCounter
+    resetDayCounter (when a cactus dies)
