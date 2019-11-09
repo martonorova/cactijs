@@ -1,0 +1,21 @@
+<%- include('header') %>
+
+<h1>Repaint</h1>
+
+<div class="dropdown">
+    <p>Old color: <%= pot.color %></p>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Select new color
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% colorOptions.forEach(function(colorOption){ %>
+        <a class="dropdown-item" href="#"><%= colorOption %></a>
+        <% }); %>
+    </div>
+</div>
+
+<a href="/" class="btn btn-outline-success" role="button">Repaint</a>
+<a href="/" class="btn btn-outline-info" role="button">Pot list</a>
+
+<%- include('footer') %>

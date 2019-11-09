@@ -1,4 +1,4 @@
-<%- include('header') -%>
+<%- include('header') %>
 
 <div class="container">
     <div class="col-xs-12 text-center">
@@ -28,12 +28,12 @@
                     <td><%= item.color %></td>
                     <td>
                         <% if (item.cactus === null) {%>
-                        <a href="repaint.html" class="btn btn-outline-primary" role="button">Repaint</a>
-                        <button type="button" class="btn btn-outline-danger">Throw away</button>
-                        <a href="plant_cactus.html" class="btn btn-outline-success" role="button">Plant Cactus</a>
+                        <a href="/pot/<%= item._id %>/repaint" class="btn btn-outline-primary" role="button">Repaint</a>
+                        <a href="/pot/<%= item._id %>/delete" class="btn btn-outline-danger" role="button">Throw away</button>
+                        <a href="/pot/<%= item._id %>/plant" class="btn btn-outline-success" role="button">Plant Cactus</a>
                         <% } else { %>
-                        <a href="repaint.html" class="btn btn-outline-primary" role="button">Repaint</a>
-                        <a href="cactus_info.html" class="btn btn-outline-info" role="button">Cactus Info</a>
+                        <a href="/pot/<%= item._id %>/repaint" class="btn btn-outline-primary" role="button">Repaint</a>
+                        <a href="/cactus/<%= item.cactus %>" class="btn btn-outline-info" role="button">Cactus Info</a>
                         <% }; %>
                         
                     </td>
@@ -43,9 +43,9 @@
             </tbody>
         </table>
         <div>
-            <a href="new_pot.html" class="btn btn-outline-primary" role="button">New Pot</a>
+            <a href="/pots/new" class="btn btn-outline-primary" role="button">New Pot</a>
         </div>
     </div>
 </div>
 
-<%- include('footer') -%>
+<%- include('footer') %>

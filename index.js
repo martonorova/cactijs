@@ -3,7 +3,7 @@ var app = express();
 
 
 app.set('view engine', 'ejs');
-app.use(express.static('static'));
+// app.use(express.static('static'));
 
 /**
  * Let's creat the .tpl and .error on the res object

@@ -2,5 +2,6 @@
 module.exports = function () {
     return function (req, res, next) {
         console.log('mainredirect');
+        return res.redirect('/dashboard');
     };
 };

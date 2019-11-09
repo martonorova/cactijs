@@ -1,0 +1,34 @@
+<%- include('header') %>
+
+<h1>NEW POT</h1>
+
+<div class="dropdown">
+    <p>Size:</p>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Select size
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% sizeOptions.forEach(function(sizeOption){ %>
+        <a class="dropdown-item" href="#"><%= sizeOption %></a>
+        <% }); %>
+    </div>
+</div>
+<div class="dropdown">
+    <p>Color:</p>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Select color
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% colorOptions.forEach(function(colorOption){ %>
+        <a class="dropdown-item" href="#"><%= colorOption %></a>
+        <% }); %>
+    </div>
+</div>
+
+
+<a href="/" class="btn btn-outline-success" role="button">Add pot</a>
+<a href="/" class="btn btn-outline-info" role="button">Pot list</a>
+
+<%- include('footer') %>

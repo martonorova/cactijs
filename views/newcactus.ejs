@@ -1,0 +1,21 @@
+<%- include('header') %>
+
+<h1>PLANT CACTUS :)</h1>
+
+<div class="dropdown">
+    <p>Type:</p>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Select type
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% cactusTypes.forEach(function(type){ %>
+        <a class="dropdown-item" href="#"><%= type %></a>
+        <% }); %>
+    </div>
+</div>
+<a href="/" class="btn btn-outline-success" role="button">Plant</a>
+<a href="/" class="btn btn-outline-info" role="button">Pot list</a>
+
+
+<%- include('footer') %>
