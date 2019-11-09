@@ -1,0 +1,51 @@
+<%- include('header') -%>
+
+<div class="container">
+    <div class="col-xs-12 text-center">
+        <h2>Pots</h2>
+    </div>
+    <div class="col-xs-12">
+        <h3>Day counter: 45</h3>
+        <button type="button" class="btn btn-secondary">Next Day!</button>
+    </div>
+    <div class="col-md-push-3 col-md-6 col-xs-12">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% pots.forEach(function(item){ %>
+                <tr>
+                    <th scope="row"><%= item._id %></th>
+                    <td><%= item.size %></td>
+                    <td><%= item.color %></td>
+                    <td>
+                        <% if (item.cactus === null) {%>
+                        <a href="repaint.html" class="btn btn-outline-primary" role="button">Repaint</a>
+                        <button type="button" class="btn btn-outline-danger">Throw away</button>
+                        <a href="plant_cactus.html" class="btn btn-outline-success" role="button">Plant Cactus</a>
+                        <% } else { %>
+                        <a href="repaint.html" class="btn btn-outline-primary" role="button">Repaint</a>
+                        <a href="cactus_info.html" class="btn btn-outline-info" role="button">Cactus Info</a>
+                        <% }; %>
+                        
+                    </td>
+                </tr>
+
+                <% }); %>
+            </tbody>
+        </table>
+        <div>
+            <a href="new_pot.html" class="btn btn-outline-primary" role="button">New Pot</a>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') -%>

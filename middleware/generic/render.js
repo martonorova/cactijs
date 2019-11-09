@@ -1,7 +1,7 @@
 // Kirendereli az oldalt a template engine segitsegevel
 
-module.exports = function () {
+module.exports = function (viewName) {
     return function (req, res) {
-        console.log('Render');
+        res.render(viewName, res.tpl);
     };
 };

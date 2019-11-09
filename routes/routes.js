@@ -1,3 +1,7 @@
+var getPotListMW = require('../middleware/pot/getPotList');
+
+var renderMW = require('../middleware/generic/render');
+
 module.exports = function (app) {
 
     // atiranyit a '/dashboard'-ra
@@ -6,9 +10,10 @@ module.exports = function (app) {
     });
 
     // Fooldal, a cserepek listaja
-    app.get('/dashboard', function(req, res, next) {
-        console.log('Dashboard /dashboard GET' );
-    });
+    app.get('/dashboard',
+        getPotListMW(),
+        renderMW('potlist')
+    );
 
     // Lepteti a nap szamlalot
     app.post('/dashboard/nextday', function(req, res, next) {
