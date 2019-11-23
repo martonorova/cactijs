@@ -1,17 +1,26 @@
-var getPotListMW = require('../middleware/pot/getPotList');
-var getPotByIdMW = require('../middleware/pot/getPotById');
-var getColorOptionsMW = require('../middleware/pot/getColorOptions');
-var getSizeOptionsMW = require('../middleware/pot/getSizeOptions');
-var deletePotMW = require('../middleware/pot/deletePot');
+const getPotListMW = require('../middleware/pot/getPotList');
+const getPotByIdMW = require('../middleware/pot/getPotById');
+const getColorOptionsMW = require('../middleware/pot/getColorOptions');
+const getSizeOptionsMW = require('../middleware/pot/getSizeOptions');
+const deletePotMW = require('../middleware/pot/deletePot');
+const createPotMW = require('../middleware/pot/createPot');
 
-var getCactusMW = require('../middleware/cactus/getCactus');
-var createCactusMW = require('../middleware/cactus/createCactus');
-var getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
+const getCactusMW = require('../middleware/cactus/getCactus');
+const createCactusMW = require('../middleware/cactus/createCactus');
+const getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
 
-var renderMW = require('../middleware/generic/render');
-var mainRedirectMW = require('../middleware/generic/mainredirect');
+const renderMW = require('../middleware/generic/render');
+const mainRedirectMW = require('../middleware/generic/mainredirect');
+
+const PotModel = require('../models/pot');
+const CactusModel = require('../models/cactus');
 
 module.exports = function (app) {
+
+    const objRepo = {
+        PotModel: PotModel,
+        CactusModel: CactusModel
+    };
 
     // atiranyit a '/dashboard'-ra
     app.get('/',
@@ -20,8 +29,8 @@ module.exports = function (app) {
 
     // Fooldal, a cserepek listaja
     app.get('/dashboard',
-        getPotListMW(),
-        renderMW('potlist')
+        getPotListMW(objRepo),
+        renderMW(objRepo, 'potlist')
     );
 
     // Lepteti a nap szamlalot
@@ -34,20 +43,22 @@ module.exports = function (app) {
     app.get('/pots/new',
         getSizeOptionsMW(),
         getColorOptionsMW(),
-        renderMW('newpot')
+        renderMW(objRepo, 'newpot')
     );
 
     // Letrehoz egy uj cserepet
     app.post('/pots/new', function(req, res, next) {
         console.log('Create new pot /pots/new POST');
         return next();
-    });
+    },
+        createPotMW(objRepo)
+    );
 
     // Rendereli a cserep atfesto formot
     app.get('/pot/:potid/repaint',
         getPotByIdMW(),
         getColorOptionsMW(),
-        renderMW('repaint')
+        renderMW(objRepo, 'repaint')
     );
 
     // Atfesti a cserepet
@@ -58,13 +69,13 @@ module.exports = function (app) {
 
     // Kitorli a cserepet
     app.get('/pot/:potid/delete',
-        deletePotMW()
+        deletePotMW(objRepo)
     );
 
     // Rendereli az uj kaktusz formot
     app.get('/pot/:potid/plant',
         getCactusTypesMW(),
-        renderMW('newcactus')
+        renderMW(objRepo, 'newcactus')
     );
 
     // Letrehoz egy uj kaktuszt
@@ -77,7 +88,7 @@ module.exports = function (app) {
     app.get('/cactus/:cactusid',
         // get cactus from pot id
         getCactusMW(),
-        renderMW('cactusinfo')
+        renderMW(objRepo, 'cactusinfo')
     );
 
     // Kaktusz ontozes
