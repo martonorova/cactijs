@@ -8,9 +8,6 @@ module.exports = function (objectRepository) {
 
     return function (req, res, next) {
 
-        console.log('DELETE POT')
-        console.log(req.params.potid);
-
         PotModel.findOne({_id: req.params.potid }, (err, pot) => {
             if (err || !pot) {
                 return next(err);
@@ -27,6 +24,6 @@ module.exports = function (objectRepository) {
 
             return res.redirect('/');
 
-        })
+        });
     };
 };

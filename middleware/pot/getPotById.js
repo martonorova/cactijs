@@ -1,32 +1,19 @@
 // Betolti a cserepet, ha letezik
+const requireOption = require('../generic/requireOption');
 
-module.exports = function () {
+module.exports = function (objectRepository) {
+
+    const PotModel = requireOption(objectRepository, 'PotModel');
+
     return function (req, res, next) {
-        pots = [
-            {
-                "_id": 1,
-                "size": 'small',
-                "color": 'red',
-                "cactus": null
-            },
-            {
-                "_id": 2,
-                "size": 'medium',
-                "color": 'blue',
-                "cactus": null
-            },
-            {
-                "_id": 3,
-                "size": 'big',
-                "color": 'green',
-                "cactus": 1
-            },
-        ];
 
-        if (['1','2','3'].includes(req.params.potid)) {
-            res.tpl.pot = pots[req.params.potid - 1];
+        PotModel.findOne({_id: req.params.potid }, (err, pot) => {
+            if (err || !pot) {
+                return next(err);
+            }
+
+            res.locals.pot = pot;
             return next();
-        }
-        return res.redirect('/dashboard');
+        });
     };
 };

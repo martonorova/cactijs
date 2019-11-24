@@ -2,20 +2,21 @@
 
 <h1>Repaint</h1>
 
-<div class="dropdown">
-    <p>Old color: <%= pot.color %></p>
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Select new color
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <% colorOptions.forEach(function(colorOption){ %>
-        <a class="dropdown-item" href="#"><%= colorOption %></a>
-        <% }); %>
-    </div>
-</div>
+<form method="POST">
 
-<a href="/" class="btn btn-outline-success" role="button">Repaint</a>
-<a href="/" class="btn btn-outline-info" role="button">Pot list</a>
+    <p>Old color: <%= pot.color %></p>
+
+    <div class="form-group">
+        <label for="color-select">Select new color</label>
+        <select id="color-select" class="form-control" name="color">
+            <% colorOptions.forEach(function(colorOption){ %>
+            <option value="<%= colorOption %>" class="dropdown-item"><%= colorOption %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-success" value="Repaint pot" />
+    <a href="/" class="btn btn-outline-info" role="button">Pot list</a>
+</form>
 
 <%- include('footer') %>

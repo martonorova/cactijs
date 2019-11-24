@@ -1,16 +1,19 @@
 // Betolti a kaktuszt, ha letezik
 
-module.exports = function () {
+const requireOption = require('../generic/requireOption');
+
+module.exports = function (objectRepository) {
+
+    const CactusModel = requireOption(objectRepository, 'CactusModel');
+
     return function (req, res, next) {
-        console.log('Get cactus by id');
 
-        console.log('CactusID: ' + req.params.cactusid);
-
-        res.tpl.cactus = {
-            "size": 'baby',
-            "type": 'haworthia'
-        }
-
-        return next();
+        CactusModel.findOne({ _id: req.params.cactusid}, (err, cactus) => {
+            if (err || !cactus) {
+                return next(err);
+            }
+            res.locals.cactus = cactus;
+            return next();
+        });
     };
 };
