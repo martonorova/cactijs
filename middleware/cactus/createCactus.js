@@ -11,13 +11,13 @@ module.exports = function (objectRepository) {
             return next();
         }
 
-        let cactus = new CactusModel();
-        cactus = req.body.cactusType;
-        cactus = 'small';
+        const cactus = new CactusModel();
+        cactus.type = req.body.cactusType;
+        cactus.size = 'small';
         
         res.locals.pot._cactus = cactus;
 
-        res.locals.cactus.save(cactusErr => {
+        cactus.save(cactusErr => {
             if (cactusErr) {
                 return next(cactusErr);
             }
