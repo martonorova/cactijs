@@ -9,18 +9,24 @@ const repaintPotMW = require('../middleware/pot/repaintPot');
 const getCactusMW = require('../middleware/cactus/getCactus');
 const createCactusMW = require('../middleware/cactus/createCactus');
 const getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
+const cactusGrowMW = require('../middleware/cactus/cactusGrow');
+
+const incrementDayCounterMW = require('../middleware/day/incrementDayCounter');
+const getDayCounterMW = require('../middleware/day/getDayCounter');
 
 const renderMW = require('../middleware/generic/render');
 const mainRedirectMW = require('../middleware/generic/mainredirect');
 
 const PotModel = require('../models/pot');
 const CactusModel = require('../models/cactus');
+const DayCounterModel = require('../models/dayCounter');
 
 module.exports = function (app) {
 
     const objRepo = {
         PotModel: PotModel,
-        CactusModel: CactusModel
+        CactusModel: CactusModel,
+        DayCounterModel: DayCounterModel
     };
 
     // atiranyit a '/dashboard'-ra
@@ -31,14 +37,15 @@ module.exports = function (app) {
     // Fooldal, a cserepek listaja
     app.get('/dashboard',
         getPotListMW(objRepo),
+        getDayCounterMW(objRepo),
         renderMW(objRepo, 'potlist')
     );
 
     // Lepteti a nap szamlalot
-    app.post('/dashboard/nextday', function(req, res, next) {
-        console.log('Increment day /dashboard/nextday POST');
-        return next();
-    });
+    app.get('/dashboard/nextday',
+        incrementDayCounterMW(objRepo),
+        mainRedirectMW()
+    );
 
     // Rendereli a cserep hozzaadasa formot
     app.get('/pots/new',
@@ -92,10 +99,13 @@ module.exports = function (app) {
     );
 
     // Kaktusz ontozes
-    app.post('/cactus/:cactusid/water', function(req, res, next) {
+    app.get('/cactus/:cactusid/water', function(req, res, next) {
         console.log('Water cactus /cactus/:cactusid/water POST');
         return next();
-    });
+    },  getCactusMW(objRepo),
+        cactusGrowMW(objRepo),
+        renderMW(objRepo, 'cactusinfo')
+    );
 
     // Bogar eltavolitasa a kaktuszrol
     app.post('/cactus/:cactusid/killbug', function(req, res, next) {

@@ -5,9 +5,9 @@
         <h2>Pots</h2>
     </div>
     <div class="col-xs-12">
-        <h3>Day counter: 45</h3>
-        <button type="button" class="btn btn-secondary">Next Day!</button>
-    </div>
+            <h3>Day counter: <%= dayCounter%> </h3>
+            <a href="/dashboard/nextday" class="btn btn-outline-primary" role="button">Next Day</a>
+        </div>
     <div class="col-md-push-3 col-md-6 col-xs-12">
 
         <table class="table">
@@ -27,13 +27,17 @@
                     <td>
                         <% if (item._cactus === null) {%>
                         <a href="/pot/<%= item._id %>/repaint" class="btn btn-outline-primary" role="button">Repaint</a>
-                        <a href="/pot/<%= item._id %>/delete" class="btn btn-outline-danger" role="button">Throw away</button>
-                        <a href="/pot/<%= item._id %>/plant" class="btn btn-outline-success" role="button">Plant Cactus</a>
-                        <% } else { %>
-                        <a href="/pot/<%= item._id %>/repaint" class="btn btn-outline-primary" role="button">Repaint</a>
-                        <a href="/cactus/<%= item._cactus %>" class="btn btn-outline-info" role="button">Cactus Info</a>
-                        <% }; %>
-                        
+                        <a href="/pot/<%= item._id %>/delete" class="btn btn-outline-danger" role="button">Throw
+                            away</button>
+                            <a href="/pot/<%= item._id %>/plant" class="btn btn-outline-success" role="button">Plant
+                                Cactus</a>
+                            <% } else { %>
+                            <a href="/pot/<%= item._id %>/repaint" class="btn btn-outline-primary"
+                                role="button">Repaint</a>
+                            <a href="/cactus/<%= item._cactus %>" class="btn btn-outline-info" role="button">Cactus
+                                Info</a>
+                            <% }; %>
+
                     </td>
                 </tr>
 
@@ -45,5 +49,7 @@
         </div>
     </div>
 </div>
+
+<script src="potlist.js"></script>
 
 <%- include('footer') %>

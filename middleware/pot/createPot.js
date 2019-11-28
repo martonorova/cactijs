@@ -6,9 +6,6 @@ module.exports = function (objectRepository) {
     const PotModel = requireOption(objectRepository, 'PotModel');
 
     return function (req, res, next) {
-        console.log('createPot')
-        console.log(req.body.size);
-        console.log(req.body.color);
 
         if (
             typeof req.body.size === 'undefined' ||
@@ -29,12 +26,10 @@ module.exports = function (objectRepository) {
             if (err) {
                 return next(err);
             }
-            console.log('saved');
             PotModel.find({}, function (err, pots) {
                 if (err) {
                     console.log(err);
-                }   
-                console.log(pots);
+                }
             })
 
             return res.redirect('/');
