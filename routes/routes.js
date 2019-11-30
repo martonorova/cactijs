@@ -13,6 +13,7 @@ const createCactusMW = require('../middleware/cactus/createCactus');
 const getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
 const cactusGrowMW = require('../middleware/cactus/cactusGrow');
 const degradeBuggyCactiMW = require('../middleware/cactus/degradeBuggyCacti');
+const bugCactiMW = require('../middleware/cactus/bugCacti');
 
 const incrementDayCounterMW = require('../middleware/day/incrementDayCounter');
 const getDayCounterMW = require('../middleware/day/getDayCounter');
@@ -49,6 +50,8 @@ module.exports = function (app) {
         getCactusListMW(objRepo),
         degradeBuggyCactiMW(objRepo),
         incrementDayCounterMW(objRepo),
+        getCactusListMW(objRepo),
+        bugCactiMW(objRepo),
         mainRedirectMW()
     );
 
