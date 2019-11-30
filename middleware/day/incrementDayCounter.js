@@ -16,7 +16,6 @@ module.exports = function (objectRepository) {
             if (!dayCounter) {
                 return next('No dayCounter');
             }
-        
             dayCounter.day = dayCounter.day + 1;
             dayCounter.save(saveErr => {
                 if (saveErr) {

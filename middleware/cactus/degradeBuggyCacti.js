@@ -6,6 +6,7 @@ const requireOption = require('../generic/requireOption');
 module.exports = function (objectRepository) {
 
     const PotModel = requireOption(objectRepository, 'PotModel');
+    const DayCounterModel = requireOption(objectRepository, 'DayCounterModel');
 
     return function (req, res, next) {
         if (typeof (res.locals.cacti) === 'undefined') {
@@ -28,7 +29,6 @@ module.exports = function (objectRepository) {
                         }
                     });
                 } else {
-
                     PotModel.findOne({_cactus: cactus._id}, (err, pot) => {
                         if (err) {
                             return next(err);
@@ -43,7 +43,17 @@ module.exports = function (objectRepository) {
                                     return next(err);
                                 }
                             });
-                            res.locals.resetDayCounter = true;
+                            DayCounterModel.findOne({}, (err, dayCounter) => {
+                                if (err) {
+                                    return next(err);
+                                }
+                                dayCounter.day = 0;
+                                dayCounter.save(saveErr => {
+                                    if (saveErr) {
+                                        return next(saveErr);
+                                    }
+                                });
+                            });
                         });
                     })
                 }

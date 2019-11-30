@@ -17,6 +17,7 @@ const bugCactiMW = require('../middleware/cactus/bugCacti');
 
 const incrementDayCounterMW = require('../middleware/day/incrementDayCounter');
 const getDayCounterMW = require('../middleware/day/getDayCounter');
+const resetDayCounterMW = require('../middleware/day/resetDayCounter');
 
 const renderMW = require('../middleware/generic/render');
 const mainRedirectMW = require('../middleware/generic/mainredirect');
@@ -49,9 +50,10 @@ module.exports = function (app) {
     app.get('/dashboard/nextday',
         getCactusListMW(objRepo),
         degradeBuggyCactiMW(objRepo),
-        incrementDayCounterMW(objRepo),
         getCactusListMW(objRepo),
         bugCactiMW(objRepo),
+        // resetDayCounterMW(objRepo),
+        incrementDayCounterMW(objRepo),
         mainRedirectMW()
     );
 

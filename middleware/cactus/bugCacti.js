@@ -5,6 +5,7 @@ const requireOption = require('../generic/requireOption');
 module.exports = function (objectRepository) {
 
     return function (req, res, next) {
+        
         if (typeof(res.locals.cacti) === 'undefined') {
             return next();
         }
