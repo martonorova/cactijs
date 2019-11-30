@@ -8,8 +8,9 @@
     <p>Buggy: <%= cactus.hasBug %></p>
 </div>
 
-
-<button type="button" class="btn btn-outline-danger">Kill bug</button>
+<% if (cactus.hasBug) { %> 
+    <a href="/cactus/<%= cactus._id %>/killbug" role="button" class="btn btn-outline-danger">Kill bug</a>
+<% } %>
 <a href="/cactus/<%= cactus._id %>/water" role="button" class="btn btn-outline-secondary">Water</a>
 <a href="/" class="btn btn-outline-info" role="button">Pot list</a>
 

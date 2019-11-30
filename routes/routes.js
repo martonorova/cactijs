@@ -14,6 +14,7 @@ const getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
 const cactusGrowMW = require('../middleware/cactus/cactusGrow');
 const degradeBuggyCactiMW = require('../middleware/cactus/degradeBuggyCacti');
 const bugCactiMW = require('../middleware/cactus/bugCacti');
+const unbugCactusMW = require('../middleware/cactus/unbugCactus');
 
 const incrementDayCounterMW = require('../middleware/day/incrementDayCounter');
 const getDayCounterMW = require('../middleware/day/getDayCounter');
@@ -117,8 +118,8 @@ module.exports = function (app) {
     );
 
     // Bogar eltavolitasa a kaktuszrol
-    app.post('/cactus/:cactusid/killbug', function(req, res, next) {
-        console.log('Kill bug on cactus /cactus/:cactusid/killbug POST');
-        return next();
-    });
+    app.get('/cactus/:cactusid/killbug',
+        getCactusMW(objRepo),
+        unbugCactusMW(objRepo)
+    );
 }
