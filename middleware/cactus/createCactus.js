@@ -14,6 +14,7 @@ module.exports = function (objectRepository) {
         const cactus = new CactusModel();
         cactus.type = req.body.cactusType;
         cactus.size = 'small';
+        cactus.hasBug = false;
         
         res.locals.pot._cactus = cactus;
 

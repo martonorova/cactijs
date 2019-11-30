@@ -9,6 +9,10 @@ const Cactus = db.model('Cactus', {
     type: {
         type: String,
         required: true
+    },
+    hasBug: {
+        type: Boolean,
+        required: true
     }
 });
 
