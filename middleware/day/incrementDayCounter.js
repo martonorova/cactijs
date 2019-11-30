@@ -18,7 +18,6 @@ module.exports = function (objectRepository) {
             }
         
             dayCounter.day = dayCounter.day + 1;
-            console.log(dayCounter);
             dayCounter.save(saveErr => {
                 if (saveErr) {
                     console.log('Failed to increment dayCounter.');

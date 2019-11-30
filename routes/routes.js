@@ -8,9 +8,11 @@ const createPotMW = require('../middleware/pot/createPot');
 const repaintPotMW = require('../middleware/pot/repaintPot');
 
 const getCactusMW = require('../middleware/cactus/getCactus');
+const getCactusListMW = require('../middleware/cactus/getCactusList');
 const createCactusMW = require('../middleware/cactus/createCactus');
 const getCactusTypesMW = require('../middleware/cactus/getCactusTypes');
 const cactusGrowMW = require('../middleware/cactus/cactusGrow');
+const degradeBuggyCactiMW = require('../middleware/cactus/degradeBuggyCacti');
 
 const incrementDayCounterMW = require('../middleware/day/incrementDayCounter');
 const getDayCounterMW = require('../middleware/day/getDayCounter');
@@ -44,6 +46,8 @@ module.exports = function (app) {
 
     // Lepteti a nap szamlalot
     app.get('/dashboard/nextday',
+        getCactusListMW(objRepo),
+        degradeBuggyCactiMW(objRepo),
         incrementDayCounterMW(objRepo),
         mainRedirectMW()
     );
