@@ -1,5 +1,6 @@
 const getPotListMW = require('../middleware/pot/getPotList');
 const getPotByIdMW = require('../middleware/pot/getPotById');
+const getPotByCactusMW = require('../middleware/pot/getPotByCactus');
 const getColorOptionsMW = require('../middleware/pot/getColorOptions');
 const getSizeOptionsMW = require('../middleware/pot/getSizeOptions');
 const deletePotMW = require('../middleware/pot/deletePot');
@@ -99,10 +100,9 @@ module.exports = function (app) {
     );
 
     // Kaktusz ontozes
-    app.get('/cactus/:cactusid/water', function(req, res, next) {
-        console.log('Water cactus /cactus/:cactusid/water POST');
-        return next();
-    },  getCactusMW(objRepo),
+    app.get('/cactus/:cactusid/water',
+        getCactusMW(objRepo),
+        getPotByCactusMW(objRepo),
         cactusGrowMW(objRepo),
         renderMW(objRepo, 'cactusinfo')
     );
