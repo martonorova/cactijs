@@ -1,0 +1,24 @@
+version: '3'
+services: 
+  app:
+    build: .
+    ports: 
+        - "3000:3000"
+  mongo:
+    image: mongo
+    restart: always
+    # ports: 
+    #   - "27017-27019:27017-27019"
+    # environment: 
+    #   - MONGO_INITDB_ROOT_USERNAME=cactususer
+    #   - MONGO_INITDB_ROOT_PASSWORD=example
+    #   - MONGO_INITDB_DATABASE=cactijs
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    # environment:
+    #   - ME_CONFIG_MONGODB_ADMINUSERNAME=cactususer
+    #   - ME_CONFIG_MONGODB_ADMINPASSWORD=example
