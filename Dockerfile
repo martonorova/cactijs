@@ -6,8 +6,8 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./src ./src
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "src/index.js" ]
+ENTRYPOINT [ "npx", "nodemon", "src/index.js" ]
